@@ -1,3 +1,28 @@
 body {
 background-color:black;
+color: white;
+}
+
+.hangman-drawing {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    margin: 0 auto;
+    border-left: 5px solid white;
+    border-bottom: 5px solid white;
+    transform: scaleY(-1);
+}
+
+.gallows-top {
+    position: absolute;
+    top: 0;
+    left: -50px;
+    width: 100px;
+    height: 5px;
+    background: white;
+}
+
+#word-display {
+    font-family: monospace;
+    letter-spacing: 0.5rem;
 }
