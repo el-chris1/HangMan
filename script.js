@@ -5,6 +5,14 @@ document.addEventListener("DOMContentLoaded", function () {
  // Any code inside this function will run
  // as soon as the page is fully loaded
  startGame();
+ 
+ // Set up event listeners for the guess button and input
+ document.getElementById('guess-btn').addEventListener('click', handleGuess);
+ document.getElementById('letter-input').addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+   handleGuess();
+  }
+ });
 });
 // This is an example function structure
 // You will place your game setup logic inside it
@@ -59,4 +67,30 @@ for (let i = 0; i < secretWord.length; i++) {
 
 // Update the word display on the page
 document.getElementById('word-display').textContent = display;
+}
+
+function handleGuess() {
+ // Get the input value and convert to uppercase
+ let input = document.getElementById('letter-input').value.toUpperCase();
+ 
+ // Clear the input field for the next guess
+ document.getElementById('letter-input').value = '';
+ 
+ // Validate that input is a single letter
+ if (input.length !== 1 || !/[A-Z]/.test(input)) {
+  alert('Please enter a single letter');
+  return;
+ }
+ 
+ // Check if the letter has already been guessed
+ if (guessedLetters.includes(input)) {
+  alert('You already guessed that letter!');
+  return;
+ }
+ 
+ // Add the letter to the guessed letters array
+ guessedLetters.push(input);
+ 
+ // Update the display
+ displayGame();
 }
