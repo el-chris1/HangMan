@@ -1,9 +1,10 @@
 const wordBankEasy = ['nike', 'Adidas', 'Gap', 'Puma', 'Zara', 'H&M', 'Crocs', 'Vans', 'Uniqlo', 'Levi’s'];
 const wordBankMedium = ['Converse', 'Lululemon', 'Abercrombie', 'Hollister', 'Urban Outfitters', 'Champion', 'Patagonia', 'North Face', 'Calvin Klein', 'Tommy Hilfiger'];
-const wordBankHard = ['balenciaga', 'Givenchy', 'Bottega Veneta', 'Comme des Garçons', 'Maison Margiela', 'Yves Saint Laurent', 'Christian Louboutin', 'Alexander McQueen', 'Salvatore Ferragamo', 'Dolce & Gabbana'];
+const wordBankHard = ['balenciaga', 'Givenchy', 'Bottega-Veneta', 'Comme des Garçons', 'Maison Margiela', 'Yves Saint Laurent', 'Christian Louboutin', 'Alexander McQueen', 'Salvatore Ferragamo', 'Dolce & Gabbana'];
 const wordBank = []
 let guessedLetters = [];
 let secretWord = "";
+let attempts = 6;
 document.addEventListener("DOMContentLoaded", function () {
   // Any code inside this function will run
   // as soon as the page is fully loaded
@@ -16,20 +17,41 @@ document.addEventListener("DOMContentLoaded", function () {
       handleGuess();
     }
   });
+  document.getElementById('reset-btn').addEventListener('click', function() {
+    startGame();
+  });
 });
 // This is an example function structure
 // You will place your game setup logic inside it
 function startGame() {
-document.getElementById('easy-btn').onclick = function () {
+  // Default to easy difficulty
   let randomIndex = Math.floor(Math.random() * wordBankEasy.length);
   secretWord = wordBankEasy[randomIndex].toUpperCase();
   console.log(secretWord);
   displayGame();
-}
-  let randomIndex = Math.floor(Math.random() * wordBank.length);
-  secretWord = wordBank[randomIndex].toUpperCase();
-  console.log(secretWord);
-  displayGame();
+
+  // Set up event listeners for difficulty buttons
+  document.getElementById('easy-btn').onclick = function () {
+    let randomIndex = Math.floor(Math.random() * wordBankEasy.length);
+    secretWord = wordBankEasy[randomIndex].toUpperCase();
+    console.log(secretWord);
+    resetGame();
+    displayGame();
+  };
+  document.getElementById('medium-btn').onclick = function () {
+    let randomIndex = Math.floor(Math.random() * wordBankMedium.length);
+    secretWord = wordBankMedium[randomIndex].toUpperCase();
+    console.log(secretWord);
+    resetGame();
+    displayGame();
+  };
+  document.getElementById('hard-btn').onclick = function () {
+    let randomIndex = Math.floor(Math.random() * wordBankHard.length);
+    secretWord = wordBankHard[randomIndex].toUpperCase();
+    console.log(secretWord);
+    resetGame();
+    displayGame();
+  };
 }
   
 
@@ -76,6 +98,12 @@ function displayGame() {
 
   // Update the word display on the page
   document.getElementById('word-display').textContent = display;
+}
+
+function resetGame() {
+  guessedLetters = [];
+  attempts = 6;
+  document.getElementById('attempts').textContent = attempts;
 }
 
 function handleGuess() {
