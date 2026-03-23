@@ -1,7 +1,7 @@
 const wordBankEasy = ['nike', 'Adidas', 'Gap', 'Puma', 'Zara', 'H&M', 'Crocs', 'Vans', 'Uniqlo', 'Levi’s'];
 const wordBankMedium = ['Converse', 'Lululemon', 'Abercrombie', 'Hollister', 'Urban Outfitters', 'Champion', 'Patagonia', 'North Face', 'Calvin Klein', 'Tommy Hilfiger'];
 const wordBankHard = ['balenciaga', 'Givenchy', 'Bottega Veneta', 'Comme des Garçons', 'Maison Margiela', 'Yves Saint Laurent', 'Christian Louboutin', 'Alexander McQueen', 'Salvatore Ferragamo', 'Dolce & Gabbana'];
-
+const wordBank = []
 let guessedLetters = [];
 let secretWord = "";
 document.addEventListener("DOMContentLoaded", function () {
@@ -20,14 +20,17 @@ document.addEventListener("DOMContentLoaded", function () {
 // This is an example function structure
 // You will place your game setup logic inside it
 function startGame() {
-  if (document.getElementById('easy-btn').value === "wordBankEasy")
-     if ( wordBank = wordBankEasy){
-   wordBank = wordBankEasy;
-  }
+document.getElementById('easy-btn').onclick = function () {
+  let randomIndex = Math.floor(Math.random() * wordBankEasy.length);
+  secretWord = wordBankEasy[randomIndex].toUpperCase();
+  console.log(secretWord);
+  displayGame();
+}
   let randomIndex = Math.floor(Math.random() * wordBank.length);
   secretWord = wordBank[randomIndex].toUpperCase();
   console.log(secretWord);
   displayGame();
+}
   
 
 
@@ -41,7 +44,6 @@ function startGame() {
   // • build the starting display
   // • update elements on the page
 
-}
 function displayGame() {
   let display = "";   // This variable will hold the string we build for the screen
 
