@@ -1,9 +1,9 @@
 const wordBankEasy = ['nike', 'Adidas', 'Gap', 'Puma', 'Zara', 'H&M', 'Crocs', 'Vans', 'Uniqlo', 'Levi’s'];
 const wordBankMedium = ['Converse', 'Lululemon', 'Abercrombie', 'Hollister', 'Urban Outfitters', 'Champion', 'Patagonia', 'North Face', 'Calvin Klein', 'Tommy Hilfiger'];
-const wordBankHard = ['balenciaga', 'Givenchy', 'Bottega-Veneta', 'Comme des Garçons', 'Maison Margiela', 'Yves Saint Laurent', 'Christian Louboutin', 'Alexander McQueen', 'Salvatore Ferragamo', 'Dolce & Gabbana'];
+const wordBankHard = ['balenciaga', 'Givenchy', 'Bottega Veneta', 'Comme des Garçons', 'Maison Margiela', 'Yves Saint Laurent', 'Christian Louboutin', 'Alexander McQueen', 'Salvatore Ferragamo', 'Dolce & Gabbana'];
 const wordBank = []
 let guessedLetters = [];
-let secretWord = "";
+let secretWord = "" 
 let attempts = 6;
 document.addEventListener("DOMContentLoaded", function () {
   // Any code inside this function will run
@@ -53,10 +53,6 @@ function startGame() {
     displayGame();
   };
 }
-  
-
-
-
   // Example things your game might do here:
   // • pick the random word
 
@@ -100,12 +96,34 @@ function displayGame() {
   document.getElementById('word-display').textContent = display;
 }
 
-function resetGame() {
-  guessedLetters = [];
-  attempts = 6;
-  document.getElementById('attempts').textContent = attempts;
+
+function displayGame() {
+  let display = "";
+
+  for (let i = 0; i < secretWord.length; i++) {
+    let letter = secretWord.charAt(i);
+
+    if (guessedLetters.includes(letter)) {
+      display += letter + " ";
+    } else {
+      display += "_ ";
+    }
+  }
+
+  document.getElementById('word-display').textContent = display;
+
+  document.getElementById('guessed-letters').textContent = guessedLetters.join(" ");
 }
 
+function resetGame() {
+  guessedLetters = [];
+ if (!guessedLetters.includes(letters)) {
+guessedLetters.push(letter);
+ }
+ if (guessedLetters .includes(letters)) {
+}
+ if 
+}
 function handleGuess() {
   // Get the input value and convert to uppercase
   let input = document.getElementById('letter-input').value.toUpperCase();
@@ -116,6 +134,10 @@ function handleGuess() {
 
   // Add the letter to the guessed letters array
   guessedLetters.push(input);
+  if guessedLetters.includes(input) {
+guessedLetters.push(input);
+
+  }
 
   // Update the display
   displayGame();
