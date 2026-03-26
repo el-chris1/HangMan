@@ -1,4 +1,4 @@
-const wordBankEasy = ['nike', 'Adidas', 'Gap', 'Puma', 'Zara', 'H&M', 'Crocs', 'Vans', 'Uniqlo', 'Levi’s'];
+const wordBankEasy = ['nike', 'Adidas', 'Gap', 'Puma', 'Zara', 'H&M', 'Crocs', 'Vans', 'Uniqlo', 'Levis'];
 const wordBankMedium = ['Converse', 'Lululemon', 'Abercrombie', 'Hollister', 'Urban Outfitters', 'Champion', 'Patagonia', 'North Face', 'Calvin Klein', 'Tommy Hilfiger'];
 const wordBankHard = ['balenciaga', 'Givenchy', 'Bottega Veneta', 'Comme des Garçons', 'Maison Margiela', 'Yves Saint Laurent', 'Christian Louboutin', 'Alexander McQueen', 'Salvatore Ferragamo', 'Dolce & Gabbana'];
 const wordBank = []
@@ -121,24 +121,32 @@ function resetGame() {
 guessedLetters.push(letter);
  }
  if (guessedLetters .includes(letters)) {
+  
 }
- if 
 }
 function handleGuess() {
-  // Get the input value and convert to uppercase
   let input = document.getElementById('letter-input').value.toUpperCase();
-
-  // Clear the input field for the next guess
   document.getElementById('letter-input').value = '';
 
+  // if (!input) return;
+  if (!input) return;
 
-  // Add the letter to the guessed letters array
-  guessedLetters.push(input);
-  if guessedLetters.includes(input) {
-guessedLetters.push(input);
-
+  if (guessedLetters.includes(input)) {
+    document.getElementById('message').textContent = "You've already used that letter!";
+    return;
   }
 
-  // Update the display
+  guessedLetters.push(input);
+
+  if (!secretWord.includes(input)) {
+    attempts--;
+    document.getElementById('attempts').textContent = attempts;
+  }
+
   displayGame();
+
+  
 }
+
+
+
