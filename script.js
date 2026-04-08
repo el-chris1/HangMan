@@ -29,35 +29,67 @@ function resetGame() {
   document.getElementById('attempts').textContent = attempts;
 }
 
+const hangmanImg = document.querySelector(".hangman-box img");
+
+function setDifficulty(level) {
+  attempts = level;
+  startGame();
+}
+
+
 function startGame() {
+  secretWord = getRandomWord();
+
+  guessedLetters = [];
+  wrongGuesses = [];
+
+  attempts = 6;
+
+  updateAttemptsDisplay();
+
+  displayWord();
+
+  document.getElementById("wrong-letters").textContent = "";
+
+   if (hangmanImg) {
+    hangmanImg.src = "1.png";
+  }
+}
+
+function decreaseAttempts() {
+  attempts--;
+  updateAttemptsDisplay();
+  if (hangmanImg) {
+    hangmanImg.src = `${8 - attempts}.png`;
+  }
+}
+/* the seven is the total amount of pics i had including the base img in the ${7 - attempts}*/
 
 
-  resetGame();
-  displayGame();
+function pressLetter(letter) {
+  if (!guessedLetters.includes(letter)) {
+    guessedLetters.push(letter);
+  }
 
-  document.getElementById('easy-btn').onclick = function () {
-    let randomIndex = Math.floor(Math.random() * wordBankEasy.length);
-     secretWord = wordBankEasy[randomIndex].toUpperCase();
-    console.log(secretWord);
-    resetGame();
-    displayGame();
-  };
+  if (!secretWord.includes(letter) && !wrongGuesses.includes(letter)) {
+    wrongGuesses.push(letter);
+    decreaseAttempts();
+     document.getElementById("wrong-letters").textContent =
+      wrongGuesses.join(" ");
+  }
+  displayWord();
 
-  document.getElementById('medium-btn').onclick = function () {
-    let randomIndex = Math.floor(Math.random() * wordBankMedium.length);
-    secretWord = wordBankMedium[randomIndex].toUpperCase();
-    console.log(secretWord);
-    resetGame();
-    displayGame();
-  };
+  const winCondition = secretWord.split("").every(letter =>
+    guessedLetters.includes(letter)
+  );
 
-  document.getElementById('hard-btn').onclick = function () {
-    let randomIndex = Math.floor(Math.random() * wordBankHard.length);
-    secretWord = wordBankHard[randomIndex].toUpperCase();
-    console.log(secretWord);
-    resetGame();
-    displayGame();
-  };
+  const loseCondition = attempts <= 0;
+
+  if (winCondition) {
+    gameOver(true);
+  } else if (loseCondition) {
+    gameOver(false);
+  }
 }
 
 function displayGame() {
