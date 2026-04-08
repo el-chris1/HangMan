@@ -1,3 +1,4 @@
+
 const wordBankEasy = ['nike', 'Adidas', 'Gap', 'Puma', 'Zara', 'H&M', 'Crocs', 'Vans', 'Uniqlo', 'Levis'];
 const wordBankMedium = ['Converse', 'Lululemon', 'Abercrombie', 'Hollister', 'Urban-Outfitters', 'Champion', 'Patagonia', 'North-Face', 'Calvin-Klein', 'Tommy-Hilfiger'];
 const wordBankHard = ['balenciaga', 'Givenchy', 'Bottega-Veneta', 'Comme-des-Garçons', 'Maison-Margiela', 'Yves-Saint-Laurent', 'Christian-Louboutin', 'Alexander-McQueen', 'Salvatore-Ferragamo', 'Dolce-&-Gabbana'];
@@ -96,4 +97,13 @@ function handleGuess() {
   }
 
   displayGame();
+  // Check win
+if (!display.includes("_")) {
+  document.getElementById('message').textContent = "You won!";
+}
+
+// Check lose
+if (attempts <= 0) {
+  document.getElementById('message').textContent = "Game over! Word was: " + secretWord;
+}
 }
