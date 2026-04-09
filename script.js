@@ -7,6 +7,7 @@ const wordBank = [];
 let guessedLetters = [];
 let secretWord = "";
 let attempts = 6;
+display = ''
 
 document.addEventListener("DOMContentLoaded", function () {
   startGame();
@@ -37,20 +38,24 @@ function setDifficulty(level) {
   startGame();
 }
 
+function getRandomWord() {
+  const allWords = wordBankEasy;
+
+  const randomIndex = Math.floor(Math.random() * allWords.length);
+
+  return allWords[randomIndex].toUpperCase();
+}
 
 function startGame() {
-  secretWord = getRandomWord();
-
+getRandomWord()
+secretWord = getRandomWord();
   guessedLetters = [];
   wrongGuesses = [];
 
   attempts = 6;
 
-  updateAttemptsDisplay();
 
-  displayWord();
-
-  document.getElementById("wrong-letters").textContent = "";
+  // document.getElementById("wrong-letters").textContent = "";
 
    if (hangmanImg) {
     hangmanImg.src = "1.png";
@@ -59,7 +64,6 @@ function startGame() {
 
 function decreaseAttempts() {
   attempts--;
-  updateAttemptsDisplay();
   if (hangmanImg) {
     hangmanImg.src = `${8 - attempts}.png`;
   }
@@ -75,10 +79,9 @@ function pressLetter(letter) {
   if (!secretWord.includes(letter) && !wrongGuesses.includes(letter)) {
     wrongGuesses.push(letter);
     decreaseAttempts();
-     document.getElementById("wrong-letters").textContent =
-      wrongGuesses.join(" ");
+     document.getElementById("wrong-letters").textContent = wrongGuesses.join(" ");
   }
-  displayWord();
+
 
   const winCondition = secretWord.split("").every(letter =>
     guessedLetters.includes(letter)
